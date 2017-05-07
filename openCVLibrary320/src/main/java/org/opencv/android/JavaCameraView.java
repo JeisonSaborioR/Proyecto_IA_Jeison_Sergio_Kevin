@@ -349,7 +349,11 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
 
                 if (!mStopThread && hasFrame) {
                     if (!mFrameChain[1 - mChainIdx].empty())
-                        deliverAndDrawFrame(mCameraFrame[1 - mChainIdx]);
+                        try {
+                            deliverAndDrawFrame(mCameraFrame[1 - mChainIdx]);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                 }
             } while (!mStopThread);
             Log.d(TAG, "Finish processing thread");
